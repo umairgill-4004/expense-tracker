@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "yourdockerhubusername/expense-tracker:latest"
+        DOCKER_IMAGE = "umair4004/expense-tracker:latest"
     }
 
     stages {
@@ -42,7 +42,7 @@ pipeline {
                 sh 'kubectl apply -f k8s/mongo-service.yaml'
                 sh 'kubectl apply -f k8s/app-deployment.yaml'
                 sh 'kubectl apply -f k8s/app-service.yaml'
-                sh 'kubectl rollout restart deployment expense-app-deployment'
+                sh 'kubectl rollout restart deployment expense-app-deployment || true'
                 sh 'kubectl get pods'
                 sh 'kubectl get svc'
             }
